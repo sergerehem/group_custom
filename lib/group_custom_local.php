@@ -208,4 +208,23 @@ class OC_Group_Custom_Local
         return $users;
     }
 
+    /**
+     * @brief get a map of all users in a group
+     * @param  string $gid
+     * @param  string $search
+     * @param  int    $limit
+     * @param  int    $offset
+     * @return array  with user ids
+     */
+    public static function usersMapInGroup($gid, $search = '', $limit = null, $offset = null)
+    {
+        $stmt = OC_DB::prepare('SELECT `uid` FROM `*PREFIX*group_user_custom` WHERE `gid` = ? AND `uid` LIKE ? AND `owner` = ?', $limit, $offset);
+        $result = $stmt->execute(array($gid, $search.'%',OCP\USER::getUser()));
+        $users = array();
+        while ($row = $result->fetchRow()) {
+            $users[] = array( "uid" => $row['uid'], "displayName" => OC_User::getDisplayName( $row['uid'] ) );
+        }
+
+        return $users;
+    }
 }
