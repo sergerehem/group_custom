@@ -36,8 +36,8 @@ class OC_Group_Custom_Local
     {
         
         // Check for existence
-        $stmt = OC_DB::prepare( "SELECT `gid` FROM `*PREFIX*groups_custom` WHERE `gid` = ?" );
-        $result = $stmt->execute( array( $gid ));
+         $stmt = OC_DB::prepare( "SELECT `gid` FROM `*PREFIX*groups_custom` WHERE `gid` = ? AND `owner` = ?" );
+        $result = $stmt->execute( array( $gid , OCP\USER::getUser() ));
         if ( $result->fetchRow() ) { return false; }
         $stmt = OC_DB::prepare( "SELECT `gid` FROM `*PREFIX*groups` WHERE `gid` = ?" );
         $result = $stmt->execute( array( $gid ));
