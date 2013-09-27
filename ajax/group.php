@@ -26,12 +26,13 @@ OCP\JSON::checkAppEnabled('group_custom');
 OCP\JSON::callCheck();
 
 if ( isset($_GET['group']) ) {
-
+    $usersMap = OC_Group_Custom_Local::usersMapInGroup( $_GET['group'] );
+    
     $tmpl = new OCP\Template("group_custom", "part.member");
     $tmpl->assign( 'group' , $_GET['group'] , false );
-    $tmpl->assign( 'members' ,  OC_Group_Custom_Local::usersInGroup( $_GET['group'] )  , false );
+    $tmpl->assign( 'members' ,  $usersMap , false );
     $page = $tmpl->fetchPage();
 
-    OCP\JSON::success(array('data' => array( 'members'=> OC_Group_Custom_Local::usersInGroup( $_GET['group'] )  ,  'page'=>$page)));
+    OCP\JSON::success(array('data' => array( 'members'=> $usersMap , 'page'=>$page)));
 
 }

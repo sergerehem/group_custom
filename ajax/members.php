@@ -36,12 +36,19 @@ if (isset($_GET['search'])) {
         $limit = 4 - $count;
         $users = OC_User::getUsers($_GET['search'], $limit, $offset);
         $offset += $limit;
-        foreach ($users as $user) {
-            if ((!isset($_GET['itemShares']) || !is_array($_GET['itemShares'][OCP\Share::SHARE_TYPE_USER]) || !in_array($user, $_GET['itemShares'][OCP\Share::SHARE_TYPE_USER])) && $user != OC_User::getUser()) {
-                $shareWith[] = array('label' => $user, 'value' => array('shareType' => OCP\Share::SHARE_TYPE_USER, 'shareWith' => $user));
-                $count++;
+        foreach ($users as $uid => $displayName) {
+            if ((!isset($_GET['itemShares']) 
+              || !is_array($_GET['itemShares'][OCP\Share::SHARE_TYPE_USER]) 
+              || !in_array($user, $_GET['itemShares'][OCP\Share::SHARE_TYPE_USER])) 
+              && $uid != OC_User::getUser()) {
+              $shareWith[] = array(
+                'label' => $displayName, 
+                'value' => array('shareType' => OCP\Share::SHARE_TYPE_USER, 
+                'shareWith' => $uid)
+              );
+              $count++;
             }
-        }
+        }    
     }
 
     OC_JSON::success(array('data' => $shareWith));

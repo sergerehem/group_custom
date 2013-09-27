@@ -32,13 +32,14 @@ if ( isset($_POST['member']) and isset($_POST['group']) ) {
     $result = OC_Group_Custom_Local::addToGroup( $_POST['member'] , $_POST['group'] ) ;
 
     if ($result) {
-
+        $usersMap = OC_Group_Custom_Local::usersMapInGroup( $_POST['group'] );
+        
         $tmpl = new OCP\Template("group_custom", "part.member");
         $tmpl->assign( 'group' , $_POST['group'] , false );
-        $tmpl->assign( 'members' , OC_Group_Custom_Local::usersInGroup( $_POST['group'] ) , false );
+        $tmpl->assign( 'members' , $usersMap , false );
         $page = $tmpl->fetchPage();
 
-        OCP\JSON::success(array('data' => array('page'=>$page)));
+        OCP\JSON::success(array('data' => array( 'members'=> $usersMap  ,  'page'=>$page)));
 
     } else {
 
