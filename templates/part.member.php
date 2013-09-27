@@ -12,8 +12,8 @@
             
             $members = $_['members'] ;
             foreach ($members as $member) {
-                echo "<li data-member=$member><img src=" . OCP\Util::imagePath( 'group_custom', 'user.png' ) . ">$member
-                <span class=\"member-actions\">
+                echo "<li data-member=" . $member['uid'] . "><img src=" . OCP\Util::imagePath( 'group_custom', 'user.png' ) . ">" . $member['displayName'] .
+                "<span class=\"member-actions\">
                     <a href=# class='action remove member' original-title=" . $l->t('Remove') . "><img class='svg action remove member' title=Quit src=" . OCP\Util::imagePath( 'core', 'actions/delete.png' ) . "></a>
                 </span>
                 </li>" ;
@@ -24,7 +24,7 @@
                 if ( OC_Group_Virtual::groupExists( $_['group'] ) ){
                     $members = OC_Group_Virtual::usersInGroup( $_['group'] ) ;
                     foreach ($members as $member) {
-                        echo "<li data-member=$member><img src=" . OCP\Util::imagePath( 'group_custom', 'user.png' ) . ">$member</li>" ;
+                        echo "<li data-member=" . $member['uid'] . "><img src=" . OCP\Util::imagePath( 'group_custom', 'user.png' ) . ">" . $member['displayName'] . "</li>" ;
                     }
                 }
             }
