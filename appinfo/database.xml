@@ -4,62 +4,76 @@
 	<name>*dbname*</name>
 	<create>true</create>
 	<overwrite>false</overwrite>
-
 	<charset>utf8</charset>
 
 	<table>
-
 		<name>*dbprefix*groups_custom</name>
-
 		<declaration>
-
 			<field>
 				<name>gid</name>
 				<type>text</type>
 				<notnull>true</notnull>
 				<length>64</length>
 			</field>
-
 			<field>
 				<name>owner</name>
 				<type>text</type>
 				<notnull>true</notnull>
 				<length>64</length>
 			</field>
-
+			<index>
+				<name>*dbprefix*groups_custom_pkey</name>
+				<primary>true</primary>
+				<field>
+					<name>owner</name>
+					<sorting>ascending</sorting>
+				</field>
+				<field>
+					<name>gid</name>
+					<sorting>ascending</sorting>
+				</field>
+			</index>
 		</declaration>
-
 	</table>
 
 	<table>
-
 		<name>*dbprefix*group_user_custom</name>
-
 		<declaration>
-
 			<field>
 				<name>gid</name>
 				<type>text</type>
 				<notnull>true</notnull>
 				<length>64</length>
 			</field>
-
 			<field>
 				<name>uid</name>
 				<type>text</type>
 				<notnull>true</notnull>
 				<length>64</length>
 			</field>
-
 			<field>
 				<name>owner</name>
 				<type>text</type>
 				<notnull>true</notnull>
 				<length>64</length>
 			</field>
-
+			<index>
+				<name>*dbprefix*group_user_custom_pkey</name>
+				<primary>true</primary>
+				<field>
+					<name>owner</name>
+					<sorting>ascending</sorting>
+				</field>
+				<field>
+					<name>gid</name>
+					<sorting>ascending</sorting>
+				</field>
+				<field>
+					<name>uid</name>
+					<sorting>ascending</sorting>
+				</field>
+			</index>
 		</declaration>
-
 	</table>
 
 </database>
