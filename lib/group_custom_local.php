@@ -202,7 +202,7 @@ class OC_Group_Custom_Local
         // $result = $stmt->execute(array($gid, $search.'%'));
         $users = array();
         while ($row = $result->fetchRow()) {
-            $users[] = $row['uid'];
+            $users[] = OC_User::getDisplayName( $row['uid'] );
         }
 
         return $users;
