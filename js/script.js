@@ -118,7 +118,7 @@ $(document).ready(function() {
     $('.member-actions > .remove.member').live('click', function() {   
         
         var container = $(this).parents('li').first();
-        var member    = container.data('member');
+        var member    = container.attr("data-member");
         
         $.post(OC.filePath('group_custom', 'ajax', 'delmember.php'), { member : member , group : OC.GroupCustom.groupSelected } , function ( jsondata ){
             if(jsondata.status == 'success' ) {
